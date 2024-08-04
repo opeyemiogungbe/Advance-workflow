@@ -7,5 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "ope ogungbe",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^9.8.0",
+    "globals": "^15.9.0",
+    "typescript-eslint": "^8.0.0"
+  }
 }
