@@ -1,0 +1,66 @@
+# Example: .github/workflows/node.js.yml
+
+# Name of the workflow
+name: Node.js CI
+
+# Specifies when the workflow should be triggered
+on:
+  # Triggers the workflow on 'push' events to the 'main' branch
+  push:
+    branches: [ main ]
+  # Also triggers the workflow on 'pull_request' events targeting the 'main' branch
+  pull_request:
+    branches: [ main ]
+
+env:
+  CUSTOM_VAR: value
+  # Environment value allows you to pass configuration and settings dynamically.
+
+# Defines the jobs that the workflow will execute
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: READ
+      packages: WRITE
+    strategy:
+      matrix:
+        node: [ubuntu-18.04, macos-latest, windows-latest]
+    
+    steps:
+      - name: use secret
+        run: |
+          echo "Access Token: ${{ secrets.ACCESS_TOKEN }}"
+      
+      - name: checkout repository
+        uses: actions/checkout@v2
+      
+      - name: Cache Node Modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+        # This snippet caches the installed node modules based on the hash of the 'package-lock.json' file.
+        # It helps in speeding up the installation process by reusing the cached modules when the 'package-lock.json' file hasn't changed.
+      
+      - name: Run Linter
+        run: npx eslint .
+        # 'npx eslint .' runs the ESLint tool on all the files in your repository.
+        # ESLint is a static code analysis tool used to identify problematic patterns in JavaScript code.
+      
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      
+      - name: install dependencies defined in package.json
+        run: npm ci
+      
+      - name: run build if present
+        run: npm run build --if-present
+             npx webpack
+      
+      - name: Runs tests as defined in the project's package.json
+        run: npm test
