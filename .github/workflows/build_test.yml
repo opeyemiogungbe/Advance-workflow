@@ -21,8 +21,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: READ
-      packages: WRITE
+      contents: read
+      packages: write
+
     strategy:
       matrix:
         node: [ubuntu-18.04, macos-latest, windows-latest]
