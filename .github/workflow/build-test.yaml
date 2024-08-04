@@ -1,1 +1,41 @@
 
+# Example: .github/workflows/node.js.yml
+
+# Name of the workflow
+name: Node.js CI
+
+# Specifies when the workflow should be triggered
+on:
+  # Triggers the workflow on 'push' events to the 'main' branch
+  push:
+    branches: [ main ]
+  # Also triggers the workflow on 'pull_request' events targeting the 'main' branch
+  pull_request:
+    branches: [ main ]
+
+# Defines the jobs that the workflow will execute
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    # Strategy for running the jobs - this section is useful for testing across multiple environments
+    strategy:
+      matrix:
+        node: [ubuntu-18.04, macos-latest, windows-latest]
+
+    steps:
+    - name: checkout repository
+      uses: actions/checkout@v2
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: install dependencies defined in package.json
+      run: npm ci
+
+    - name: run build if present
+      run: npm run build --if-present
+
+    - name: Runs tests as defined in the project's package.json
+      run: npm test
