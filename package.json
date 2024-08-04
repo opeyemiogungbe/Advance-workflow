@@ -4,8 +4,8 @@
   "description": "for learning purposes",
   "main": "index.js",
   "scripts": {
-     "test": "jest",
-     "build": "webpack"
+    "test": "jest",
+    "build": "webpack"
   },
   "author": "ope ogungbe",
   "license": "ISC",
