@@ -20,12 +20,18 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-    # Strategy for running the jobs - this section is useful for testing across multiple environments
+    permissions:
+      contents: READ
+      packages: WRITE
     strategy:
       matrix:
         node: [ubuntu-18.04, macos-latest, windows-latest]
-
+    
     steps:
+      - name: use secret
+        run: |
+          echo "Access Token: ${{ secrets.ACCESS_TOKEN }}"
+      
       - name: checkout repository
         uses: actions/checkout@v2
       
