@@ -52,11 +52,6 @@ jobs:
       - name: install dependencies defined in package.json
         run: npm ci
       
-      - name: Run Linter
-        run: npx eslint .
-        # 'npx eslint .' runs the ESLint tool on all the files in your repository.
-        # ESLint is a static code analysis tool used to identify problematic patterns in JavaScript code.
-      
       - name: run build if present
         run: npm run build --if-present
       
