@@ -1,10 +1,27 @@
 # This file configures the rules for ESLint, specifying what should be checked.
 # Example .eslintrc content:
  {
-  "extends": "eslint:recommended",
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
   "rules": {
-    "semi": "error",
+    "semi": ["error", "always"],
     "quotes": ["error", "single"],
-    // additional custom rules here
-  }
+    "indent": ["error", 2]
+  },
+  "plugins": [
+    "react"
+  ]
 }
