@@ -10,8 +10,10 @@
   "author": "ope ogungbe",
   "license": "ISC",
   "devDependencies": {
+    "jest": "^29.7.0",
     "eslint": "^9.8.0",
     "globals": "^15.9.0",
     "typescript-eslint": "^8.0.0"
   }
 }
+
