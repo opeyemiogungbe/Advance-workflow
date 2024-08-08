@@ -46,12 +46,6 @@ jobs:
       
       - name: Set execute permission for ESLint
         run: chmod +x ./node_modules/.bin/eslint
-
-      - name: Run Linter
-        run: npx eslint .
-        # 'npx eslint .' runs the ESLint tool on all the files in your repository.
-        # ESLint is a static code analysis tool used to identify problematic patterns in JavaScript code.
-
       
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
